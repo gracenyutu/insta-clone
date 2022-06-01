@@ -1,0 +1,21 @@
+{% extends 'instaapp/base.html'%}
+{% block content %}
+<div class="reel">
+    {% if reels %} {% for i in reels %} {% if forloop.counter == 1 %}
+
+    <div class="video_reel" style="height: 90vh">
+      <video src="{{i.reel.url}}"></video>
+      <a href="/likereel/{{i.id}}/" class="btn btn-danger like_reel">
+        Like {{i.likes.count}}
+      </a>
+    </div>
+    {% else %}
+    <div class="video_reel">
+      <video src="{{i.reel.url}}"></video>
+      <a href="/likereel/{{i.id}}/" class="btn btn-danger like_reel">
+        Like {{i.likes.count}}
+      </a>
+    </div>
+  </div>
+  {% endif %} {% endfor %} {% endif %}
+{% endblock %}
