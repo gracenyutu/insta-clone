@@ -34,4 +34,10 @@ def Login(request):
     return render(request, 'instaapp/login.html')
 
 def create_profile(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        image = request.FILES['image']
+        user = User.objects.create_user(username=username,password=password)
+        profile = Profile.objects.create(user=user,image=image)
     return render(request, 'instaapp/signup.html')
