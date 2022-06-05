@@ -3,18 +3,8 @@
 {% comment %} {% if profile_of_user %}
 <div class="container">
   <div class="d-flex header justify-content-around align-items-center my-3">
-    <img
-      src="{{profile.profile_picture.url}}"
-      width="22"
-      height="22"
-      class="rounded-circle"
-      alt="..."
-      style="width: 55px; height: 55px"
-    />
-    <div
-      class="d-flex justify-content-around align-items-center"
-      style="width: 50vw"
-    >
+    <img src="{{profile.photo.url}}" width="22" height="22" class="rounded-circle" alt="..." style="width: 55px; height: 55px"/>
+    <div class="d-flex justify-content-around align-items-center" style="width: 50vw">
       <div class="d-flex flex-column">
         <h5>Posts</h5>
         <h5>{{posts_num}}</h5>
@@ -43,18 +33,8 @@
 {% else %} {% endcomment %}
 <div class="container">
   <div class="d-flex header justify-content-around align-items-center my-3">
-    <img
-      src="{{profile.profile_picture.url}}"
-      width="22"
-      height="22"
-      class="rounded-circle"
-      alt="..."
-      style="width: 55px; height: 55px"
-    />
-    <div
-      class="d-flex justify-content-around align-items-center"
-      style="width: 50vw"
-    >
+    <img src="{{profile.photo.url}}" width="22" height="22" class="rounded-circle" alt="..." style="width: 55px; height: 55px"/>
+    <div class="d-flex justify-content-around align-items-center" style="width: 50vw">
       <div class="d-flex flex-column">
         <h5>Posts</h5>
         <h5>{{posts_num}}</h5>
