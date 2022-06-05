@@ -2,16 +2,22 @@ from multiprocessing import context
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Profile, Post
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
-    return render(request, 'instaapp/home.html')
+    posts = Post.objects.filter(Q(profile__followers=request.user))
+    context = {"posts":posts}
+    return render(request, 'instaapp/home.html',context)
 
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-    return render(request, 'instaapp/profile.html',{'profile':profile,'profile_of_user':True})
+    posts = Post.objects.filter(user=request.user)
+    posts_num = posts.count()
+    return render(request, 'instaapp/profile.html',{'profile':profile,'profile_of_user':True,'posts':posts, 'posts_num':posts_num})
 
 def search(request):
     search = request.GET['username']
@@ -65,3 +71,11 @@ def upload_post(request):
         if posts:
             messages.success(request,"post uploaded successfully!")
     return render(request,'uploadposts.html')
+
+def like_post(request,id):
+    post = Post.objects.filter(id=id)
+    if request.user in post[0].likes.all():                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        post[0].likes.remove(request.user)
+    else:
+        post[0].likes.add(request.user)
+    return redirect("home")
