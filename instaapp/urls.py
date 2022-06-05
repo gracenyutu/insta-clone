@@ -8,5 +8,6 @@ urlpatterns = [
     path('login/',views.Login,name="Login"),
     path('logout/',views.Logout,name="Logout"),
     path('profile/',views.profile,name="profile"),
-    path('follow/<int:id>/<str:username>/',views.follow,name="follow")
+    path('follow/<int:id>/<str:username>/',views.follow,name="follow"),
+    path('uploadpost/',views.upload_post,name="upload_post"),
 ]

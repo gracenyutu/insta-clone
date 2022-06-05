@@ -55,3 +55,13 @@ def follow(request,id,username):
         profile.followers.add(request.user)
         login_profile.followings.add(profile.user)
     return redirect(f'search?username={username}')
+
+def upload_post(request):
+    logout(request)
+    if request.method == 'POST':
+        post = request.FILES['post']
+        profile = Profile.objects.get(user=request.user)
+        posts = Post.objects.create(user=request.user,image=post,profile=profile)
+        if posts:
+            messages.success(request,"post uploaded successfully!")
+    return render(request,'uploadposts.html')
