@@ -13,16 +13,7 @@ def profile(request):
     return render(request, 'instaapp/profile.html',{'profile':profile,'profile_of_user':True})
 
 def search(request):
-    if not request.user.is_authenticated:
-        return redirect("Login")
-    profile = Profile.objects.get(user=request.user)
-    profileimage = profile.profile_picture.url
-    profile = Profile.objects.get(user=request.user)
-    profileimage = profile.profile_picture.url
-    search = request.GET['username']
-    profiles = Profile.objects.filter(user__username__icontains=search)
-    context = {'profiles':profiles,'username':search,"profileimage":profileimage}
-    return render(request,'instaapp/search.html',context)
+    return render(request,'instaapp/search.html')
 
 def Login(request):
     if request.method == 'POST':

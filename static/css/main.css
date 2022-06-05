@@ -3,3 +3,13 @@
   font-weight: bolder;
   font-size: x-large;
 }
+
+.icon {
+  height: 30px;
+  width: 30px;
+}
+
+.addi {
+  height: 45px;
+  width: 45px;
+}
