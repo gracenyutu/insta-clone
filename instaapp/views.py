@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
@@ -13,7 +14,10 @@ def profile(request):
     return render(request, 'instaapp/profile.html',{'profile':profile,'profile_of_user':True})
 
 def search(request):
-    return render(request,'instaapp/search.html')
+    search = request.GET['username']
+    profiles = Profile.objects.filter(user__username__icontains=search)
+    context = {'profiles':profiles,'username':search}
+    return render(request,'instaapp/search.html',context)
 
 def Login(request):
     if request.method == 'POST':
@@ -40,3 +44,10 @@ def create_profile(request):
 def Logout(request):
     logout(request)
     return redirect('Login')
+
+def follow(request,id,username):
+    profile = Profile.objects.get(id=id)
+    profile.followers.add(request.user)
+    login_profile = Profile.objects.get(user=request.user)
+    login_profile.followings.add(profile.user)
+    return redirect(f'search?username={username}')

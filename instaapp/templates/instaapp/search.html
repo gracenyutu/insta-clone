@@ -7,7 +7,7 @@
         {% for profile in profiles %} {% if user in profile.followers.all %}
         <div id="post">
           <div id="post_header" style="padding: 0 60px">
-            <img src="{{profile.profile_picture.url}}" alt="" srcset="" />
+            <img src="{{profile.photo.url}}" alt="" srcset="" />
             <a href="/profile/{{profile.id}}">
               <h4 id="post_user" style="font-weight: 900">
                 {{profile.user}}
@@ -28,7 +28,7 @@
         {% else %}
         <div id="post">
           <div id="post_header" style="padding: 0 60px">
-            <img src="{{profile.profile_picture.url}}" alt="" srcset="" />
+            <img src="{{profile.photo.url}}" alt="" srcset="" />
             <a href="/profile/{{profile.id}}">
               <h4 id="post_user" style="font-weight: 900">
                 {{profile.user}}
