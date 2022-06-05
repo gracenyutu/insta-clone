@@ -21,3 +21,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts')
     likes = models.ManyToManyField(User,related_name="likes",blank=True)
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+
+class Reels(models.Model):
+    reel = models.FileField(upload_to='reel')
+    likes = models.ManyToManyField(User,blank=True)
