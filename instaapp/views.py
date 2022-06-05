@@ -89,3 +89,7 @@ def upload_reel(request):
         if reels:
             messages.success(request,"reel uploaded successfully!")
     return render(request,'uploadreels.html')
+
+def reels(request):
+    reels = Reels.objects.all()
+    return render(request,'reels.html',{'reels':reels})
