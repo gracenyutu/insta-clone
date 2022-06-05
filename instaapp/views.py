@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .models import Profile, Image
+from .models import Profile, Post
 
 # Create your views here.
 def home(request):
