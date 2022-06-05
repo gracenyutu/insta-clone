@@ -3,49 +3,24 @@
     <div class="container">
         <h1 class="text-center bg-dark text-light">Create Profile</h1>
         <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input
-            type="text"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="username"
-            />
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-            />
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-            >C-Password</label
-            >
-            <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="cpass"
-            />
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-            >Profile Picture</label
-            >
-            <input
-            type="file"
-            name="image"
-            class="form-control"
-            id="exampleInputPassword1"
-            />
-        </div>
-        <button type="submit" class="btn btn-primary">Create Profile</button>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username"/>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password"/>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="cpass"/>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Profile Picture</label>
+                <input type="file" name="image" class="form-control" id="exampleInputPassword1"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Profile</button>
         </form>
     </div>
 {% endblock %}

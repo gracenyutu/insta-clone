@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.core.checks. import messages
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Profile, Image
 
@@ -33,6 +34,13 @@ def search(request):
     return render(request,'instaapp/search.html',context)
 
 def Login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username,password=password)
+        if user:
+            login(request,user)
+            return redirect('profile')
     return render(request, 'instaapp/login.html')
 
 def create_profile(request):
@@ -43,6 +51,10 @@ def create_profile(request):
         user = User.objects.create_user(username=username,password=password)
         profile = Profile.objects.create(user=user,photo=image)
         if profile:
-            messages.success(request.'Profile created Kindly Login')
-            return redirect("login")
+            messages.success(request,'Profile created Kindly Login')
+            return redirect("Login")
     return render(request, 'instaapp/signup.html')
+
+def logout(request):
+    logout(request)
+    return redirect('Login')
