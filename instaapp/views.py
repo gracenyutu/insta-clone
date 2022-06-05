@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.core.checks. import messages
 from django.shortcuts import render, redirect
 from .models import Profile, Image
 
@@ -39,5 +41,8 @@ def create_profile(request):
         password = request.POST['password']
         image = request.FILES['image']
         user = User.objects.create_user(username=username,password=password)
-        profile = Profile.objects.create(user=user,image=image)
+        profile = Profile.objects.create(user=user,photo=image)
+        if profile:
+            messages.success(request.'Profile created Kindly Login')
+            return redirect("login")
     return render(request, 'instaapp/signup.html')
