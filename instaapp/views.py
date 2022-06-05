@@ -47,7 +47,11 @@ def Logout(request):
 
 def follow(request,id,username):
     profile = Profile.objects.get(id=id)
-    profile.followers.add(request.user)
     login_profile = Profile.objects.get(user=request.user)
-    login_profile.followings.add(profile.user)
+    if request.user in profile.followers.all():
+        profile.followers.remove(request.user)
+        login_profile.followings.remove(profile.user)
+    else:
+        profile.followers.add(request.user)
+        login_profile.followings.add(profile.user)
     return redirect(f'search?username={username}')
