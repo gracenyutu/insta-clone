@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Profile, Post
+from .models import Profile, Post, Reels
 from django.db.models import Q
 
 # Create your views here.
@@ -79,3 +79,13 @@ def like_post(request,id):
     else:
         post[0].likes.add(request.user)
     return redirect("home")
+
+def upload_reel(request):
+    logout(request)
+    if request.method == 'POST':
+        reel = request.FILES['reel']
+        profile = Profile.objects.get(user=request.user)
+        reels = Reels.objects.create(reel=reel)
+        if reels:
+            messages.success(request,"reel uploaded successfully!")
+    return render(request,'uploadreels.html')
