@@ -1,4 +1,17 @@
+antiorm==1.2.1
 asgiref==3.5.2
 backports.zoneinfo==0.2.1
+config==0.5.1
+db==0.1.1
+db-sqlite3==0.0.1
+dj-database-url==0.5.0
 Django==4.0.4
+django-db==0.0.7
+django-heroku==0.3.1
+Pillow==9.1.1
+psycopg2==2.9.3
+PyMySQL==1.0.2
+python-decouple==3.6
+pytz==2022.1
 sqlparse==0.4.2
+whitenoise==6.2.0
