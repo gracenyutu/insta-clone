@@ -1,13 +1,13 @@
 {% extends 'instaapp/base.html'%}
 {% block content %}
 <main>
-    <div class="post_story">
-      <div class="posts">
+    <div class="container">
+      <div class="card">
         <!-- USER POSTS STARTS HERE -->
         {% for profile in profiles %} {% if user in profile.followers.all %}
-        <div id="post">
-          <div id="post_header" style="padding: 0 60px">
-            <img src="{{profile.photo.url}}" alt="" srcset="" />
+        <div class="row">
+          <div class="column-sm">
+            <img src="{{profile.photo.url}}" alt="" width="22" height="22" class="rounded-circle" style="width: 55px; height: 55px"/>
             <a href="/profile/{{profile.id}}">
               <h4 id="post_user" style="font-weight: 900">
                 {{profile.user}}
@@ -18,7 +18,7 @@
           <div class="lower">
             <a
               href="/follow/{{profile.id}}/{{username}}"
-              class="text-center btn btn-light text-dark"
+              class="text-center btn btn-danger text-dark"
               id="like"
             >
               unfollow
@@ -26,9 +26,9 @@
           </div>
         </div>
         {% else %}
-        <div id="post">
-          <div id="post_header" style="padding: 0 60px">
-            <img src="{{profile.photo.url}}" alt="" srcset="" />
+        <div id="card row">
+          <div id="column">
+            <img src="{{profile.photo.url}}" alt="" width="22" height="22" class="rounded-circle" style="width: 55px; height: 55px"/>
             <a href="/profile/{{profile.id}}">
               <h4 id="post_user" style="font-weight: 900">
                 {{profile.user}}
@@ -39,7 +39,7 @@
           <div class="lower">
             <a
               href="/follow/{{profile.id}}/{{username}}"
-              class="text-center btn btn-danger"
+              class="text-center btn btn-success"
               id="like"
             >
               Follow

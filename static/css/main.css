@@ -13,3 +13,52 @@
   height: 45px;
   width: 45px;
 }
+
+body {
+  background-color: white;
+}
+
+.photo {
+  width: "55px";
+  height: "55px";
+}
+
+.card-img-top {
+  width: 300px;
+  height: 300px;
+}
+
+.card {
+  border-style: groove;
+  background-color: antiquewhite;
+}
+
+.header {
+  background-color: antiquewhite;
+  color: black;
+  border-radius: 25px;
+  width: 1000px;
+}
+
+.bg-steel {
+  background: linear-gradient(
+    90deg,
+    hsla(333, 100%, 53%, 1) 0%,
+    hsla(33, 94%, 57%, 1) 100%
+  );
+}
+
+.btn-search {
+  background-color: rgb(155, 88, 155);
+}
+
+#user_post {
+  width: 500px;
+  height: 450px;
+}
+
+#post {
+  width: 550px;
+  height: 650px;
+  margin-left: 100px;
+}

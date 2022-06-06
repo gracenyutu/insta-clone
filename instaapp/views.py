@@ -2,7 +2,7 @@ from multiprocessing import context
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Profile, Post, Reels, Story
 from django.db.models import Q
@@ -87,7 +87,7 @@ def upload_post(request):
         posts = Post.objects.create(user=request.user,image=post,profile=profile)
         if posts:
             messages.success(request,"post uploaded successfully!")
-    return render(request,'uploadposts.html',{'profileimage':profileimage})
+    return render(request,'instaapp/uploadpost.html',{'profileimage':profileimage})
 
 def like_post(request,id):
     post = Post.objects.filter(id=id)
