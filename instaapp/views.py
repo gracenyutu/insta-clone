@@ -14,11 +14,22 @@ def home(request):
     context = {"posts":posts,'stories':story}
     return render(request, 'instaapp/home.html',context)
 
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    posts = Post.objects.filter(user=request.user)
-    posts_num = posts.count()
-    return render(request, 'instaapp/profile.html',{'profile':profile,'profile_of_user':True,'posts':posts, 'posts_num':posts_num})
+def profile(request,id=None):
+    if not request.user.is_authenticated:
+        return redirect("Login")
+    if id is not None:
+        profile_id = Profile.objects.get(id=id)
+        posts = Post.objects.filter(profile=profile_id)
+        posts_num = posts.count()
+        profile = Profile.objects.get(user=request.user)
+        profileimage = profile.profile_picture.url
+    else:
+        profile_id = Profile.objects.get(user=request.user)
+        posts = Post.objects.filter(user=request.user)
+        posts_num = posts.count()
+        profile = Profile.objects.get(user=request.user)
+        profileimage = profile.profile_picture.url
+    return render(request,'instaapp/profile.html',{'profile':profile_id,'profileimage':profileimage,'profile_of_user':True,'posts':posts,'posts_num':posts_num})
 
 def search(request):
     search = request.GET['username']
