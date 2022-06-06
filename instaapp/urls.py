@@ -13,4 +13,6 @@ urlpatterns = [
     path('like/<int:id>/',views.like_post,name="like"),
     path('uploadreel/',views.upload_reel,name="upload_reel"),
     path('reels/', views.reels, name='reels'),
+    # path('likereel/<int:id>/',views.like_reel,name="like_reel"),
+    path('uploadstory/',views.upload_story,name="upload_story"),
 ]

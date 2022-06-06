@@ -4,13 +4,14 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Profile, Post, Reels
+from .models import Profile, Post, Reels, Story
 from django.db.models import Q
 
 # Create your views here.
 def home(request):
     posts = Post.objects.filter(Q(profile__followers=request.user) & ~Q(likes=request.user))
-    context = {"posts":posts}
+    story = Story.objects.filter(profile__followers=request.user)
+    context = {"posts":posts,'stories':story}
     return render(request, 'instaapp/home.html',context)
 
 def profile(request):
@@ -63,7 +64,6 @@ def follow(request,id,username):
     return redirect(f'search?username={username}')
 
 def upload_post(request):
-    logout(request)
     if request.method == 'POST':
         post = request.FILES['post']
         profile = Profile.objects.get(user=request.user)
@@ -93,3 +93,12 @@ def upload_reel(request):
 def reels(request):
     reels = Reels.objects.all()
     return render(request,'reels.html',{'reels':reels})
+
+def upload_story(request):
+   if request.method == 'POST':
+        story = request.POST['story']
+        profile = Profile.objects.get(user=request.user)
+        story_upload = Story.objects.create(story=story,profile=profile)
+        if story_upload:
+            messages.success(request,"story uploaded successfully!")
+        return render(request,'UploadStory.html')
