@@ -9,6 +9,8 @@ from django.db.models import Q
 
 # Create your views here.
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect("Login")
     posts = Post.objects.filter(Q(profile__followers=request.user) & ~Q(likes=request.user))
     story = Story.objects.filter(profile__followers=request.user)
     context = {"posts":posts,'stories':story}
@@ -22,19 +24,21 @@ def profile(request,id=None):
         posts = Post.objects.filter(profile=profile_id)
         posts_num = posts.count()
         profile = Profile.objects.get(user=request.user)
-        profileimage = profile.profile_picture.url
+        profileimage = profile.photo.url
     else:
         profile_id = Profile.objects.get(user=request.user)
         posts = Post.objects.filter(user=request.user)
         posts_num = posts.count()
         profile = Profile.objects.get(user=request.user)
-        profileimage = profile.profile_picture.url
+        profileimage = profile.photo.url
     return render(request,'instaapp/profile.html',{'profile':profile_id,'profileimage':profileimage,'profile_of_user':True,'posts':posts,'posts_num':posts_num})
 
 def search(request):
+    profile = Profile.objects.get(user=request.user)
+    profileimage = profile.photo.url
     search = request.GET['username']
     profiles = Profile.objects.filter(user__username__icontains=search)
-    context = {'profiles':profiles,'username':search}
+    context = {'profiles':profiles,'username':search, 'profileimage':profileimage}
     return render(request,'instaapp/search.html',context)
 
 def Login(request):
@@ -75,13 +79,15 @@ def follow(request,id,username):
     return redirect(f'search?username={username}')
 
 def upload_post(request):
+    profile = Profile.objects.get(user=request.user)
+    profileimage = profile.photo.url
     if request.method == 'POST':
         post = request.FILES['post']
         profile = Profile.objects.get(user=request.user)
         posts = Post.objects.create(user=request.user,image=post,profile=profile)
         if posts:
             messages.success(request,"post uploaded successfully!")
-    return render(request,'uploadposts.html')
+    return render(request,'uploadposts.html',{'profileimage':profileimage})
 
 def like_post(request,id):
     post = Post.objects.filter(id=id)
@@ -92,24 +98,27 @@ def like_post(request,id):
     return redirect("home")
 
 def upload_reel(request):
-    logout(request)
+    profile = Profile.objects.get(user=request.user)
+    profileimage = profile.photo.url
     if request.method == 'POST':
         reel = request.FILES['reel']
         profile = Profile.objects.get(user=request.user)
         reels = Reels.objects.create(reel=reel)
         if reels:
             messages.success(request,"reel uploaded successfully!")
-    return render(request,'uploadreels.html')
+    return render(request,'uploadreels.html',{'profileimage':profileimage})
 
 def reels(request):
     reels = Reels.objects.all()
     return render(request,'reels.html',{'reels':reels})
 
 def upload_story(request):
-   if request.method == 'POST':
-        story = request.POST['story']
-        profile = Profile.objects.get(user=request.user)
-        story_upload = Story.objects.create(story=story,profile=profile)
-        if story_upload:
-            messages.success(request,"story uploaded successfully!")
-        return render(request,'UploadStory.html')
+    profile = Profile.objects.get(user=request.user)
+    profileimage = profile.photo.url
+    if request.method == 'POST':
+            story = request.POST['story']
+            profile = Profile.objects.get(user=request.user)
+            story_upload = Story.objects.create(story=story,profile=profile)
+            if story_upload:
+                messages.success(request,"story uploaded successfully!")
+            return render(request,'UploadStory.html', {'profileimage':profileimage})
