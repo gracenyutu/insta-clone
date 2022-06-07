@@ -11,7 +11,7 @@ Grace Nyutu
 
 ## Live Demo
 
-Click [Link](https://quiet-castle-94039.herokuapp.com/) to visit my site
+Click [Link](https://quiet-plateau-13856.herokuapp.com/) to visit my site
 
 ## Screenshot
 ![Screenshot from 2022-06-06 21-44-52](https://user-images.githubusercontent.com/95080265/172230055-e7b80c06-3dc4-4868-9a6e-b9ab9aaceec7.png)
