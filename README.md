@@ -13,7 +13,11 @@ Grace Nyutu
 
 Click [Link](https://quiet-plateau-13856.herokuapp.com/) to visit my site
 
-## Screenshot
+## Screenshot(login page)
+![Screenshot from 2022-06-07 11-59-37](https://user-images.githubusercontent.com/95080265/172340992-dcf0b0e4-7255-42d1-90a6-10eb89eda695.png)
+
+
+## Screenshot(profile page)
 ![Screenshot from 2022-06-06 21-44-52](https://user-images.githubusercontent.com/95080265/172230055-e7b80c06-3dc4-4868-9a6e-b9ab9aaceec7.png)
 
 
